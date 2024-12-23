@@ -53,7 +53,7 @@
             line-height: 1.5;
             max-width: 80%;
             opacity: 0;
-            transition: opacity 2s;
+            transition: opacity 1s ease-in-out;
             z-index: 2;
         }
 
@@ -207,8 +207,16 @@
                 
                 words.forEach((word, index) => {
                     setTimeout(() => {
-                        mainMessage.innerHTML += word + ' ';  // Add the word one by one
-                        mainMessage.style.opacity = '1';  // Ensure the message fades in as it appears
+                        let span = document.createElement('span');
+                        span.innerText = word + ' ';
+                        span.style.opacity = 0;  // Start with opacity 0
+                        span.style.transition = "opacity 1s ease-in-out";  // Apply fade-in effect
+                        mainMessage.appendChild(span);
+
+                        // Fade in each word
+                        setTimeout(() => {
+                            span.style.opacity = 1;
+                        }, 100);  // Start fading in each word immediately
                     }, index * 500);  // Adjust the delay (500ms between words)
                 });
 
