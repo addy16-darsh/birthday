@@ -157,7 +157,7 @@
     <div class="created-with-love " id="createdWithLove">Created with Love ❤️</div>
 
     <!-- Button to start -->
-    <button onclick="resetShow()">Surprise Awaits!</button>
+    <button onclick="startShow()">Surprise Awaits!</button>
 
     <script>
         let slideIndex = 0;
@@ -235,36 +235,6 @@
 
         // Call stopSlideshow function after the slideshow stops
         setTimeout(stopSlideshow, 15000); // Stop slideshow after 15 seconds
-
-        // Function to reset everything when button is clicked
-        function resetShow() {
-            // Reset the slide index and hide everything
-            slideIndex = 0;
-            clearInterval(slideInterval);
-
-            // Hide all content
-            document.getElementById("title").style.display = "none";
-            const messages = document.querySelectorAll(".main-message");
-            messages.forEach((message) => {
-                message.style.opacity = "0";
-            });
-            const slides = document.getElementsByClassName("mySlides");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-
-            // Hide "Created with Love" message
-            document.getElementById("createdWithLove").style.opacity = "0";
-
-            // Show the start button again
-            document.querySelector("button").style.display = "block";
-
-            // Restart the slideshow
-            startShow();
-        }
-
-        // Start the slideshow immediately when the page loads
-        window.onload = startShow;
     </script>
 
 </body>
