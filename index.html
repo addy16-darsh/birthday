@@ -166,7 +166,7 @@
     <!-- Quotes at corners -->
     <div class="quote quote-top-left">"Pookie, eat more!<br>You’re not going to grow taller by staring at your food 😒"</div>
     <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched🍼"</div>
-    <div class="quote quote-bottom-left">"NPookie, talk more! The quieter you get, <br>the more I wonder what trouble you're planning."</div>
+    <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>the more I wonder what trouble you're planning."</div>
     <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise😘🎀"</div>
 
     <!-- Slideshow container -->
@@ -196,14 +196,21 @@
                 document.getElementById("title").style.transform = "translate(-50%, 0)";
                 document.getElementById("title").style.top = "5%";
                 document.getElementById("title").style.transition = "transform 1s ease-in-out";
-                
+
                 // Start the slideshow
                 slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-                // Fade in the main message
-                setTimeout(() => {
-                    document.getElementById("mainMessage").style.opacity = "1";
-                }, 2500); // Add a slight delay before showing the message
+                // Start revealing the main message word by word
+                let mainMessage = document.getElementById("mainMessage");
+                let words = mainMessage.innerText.split(" ");
+                mainMessage.innerHTML = '';  // Clear the current text
+                
+                words.forEach((word, index) => {
+                    setTimeout(() => {
+                        mainMessage.innerHTML += word + ' ';  // Add the word one by one
+                        mainMessage.style.opacity = '1';  // Ensure the message fades in as it appears
+                    }, index * 500);  // Adjust the delay (500ms between words)
+                });
 
                 // Fade in the quotes
                 const quotes = document.querySelectorAll(".quote");
