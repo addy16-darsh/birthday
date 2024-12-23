@@ -1,7 +1,3 @@
-Share
-
-BB
-You said:
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,7 +135,7 @@ You said:
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
-            display: block;
+            display: none;
         }
 
         .created-with-love {
@@ -198,13 +194,17 @@ You said:
     <!-- Created with love message -->
     <div class="created-with-love " id="createdWithLove">Created with Love ❤️</div>
 
-    <!-- Button to start -->
-    <button onclick="startShow()">Surprise Awaits!</button>
+    <!-- Surprise Awaits Button -->
+    <button id="startButton" onclick="startShow()">Surprise Awaits!</button>
+
+    <!-- Revisit Button -->
+    <button id="revisitButton" onclick="revisit()">Revisit</button>
 
     <script>
         let slideIndex = 0;
         let messageIndex = 0;
         let slideInterval;
+        let isRevisitClicked = false;
 
         // Function to start the slideshow and show messages
         function startShow() {
@@ -232,12 +232,16 @@ You said:
                 });
 
                 // Hide the start button after starting the animation
-                document.querySelector("button").style.display = "none";
+                document.getElementById("startButton").style.display = "none";
             }, 2000); // Wait 2 seconds before moving the title to the top
         }
 
         // Function to show slides
         function showSlides() {
+            if (isRevisitClicked) {
+                clearInterval(slideInterval);
+                return;
+            }
             let slides = document.getElementsByClassName("mySlides");
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
@@ -264,35 +268,15 @@ You said:
             }
         }
 
-        // Function to stop the slideshow and vanish everything after the last animation
-        function stopSlideshow() {
-            clearInterval(slideInterval); // Stop slideshow
-
-            // Vanish all the content
-            setTimeout(() => {
-                document.getElementById("title").style.display = "none";
-                const messages = document.querySelectorAll(".main-message");
-                messages.forEach((message) => {
-                    message.style.display = "none";
-                });
-                const quotes = document.querySelectorAll(".quote");
-                quotes.forEach((quote) => {
-                    quote.style.display = "none";
-                });
-
-                // Show "Created with Love"
-                document.getElementById("createdWithLove").style.opacity = "1";
-
-                // Show the button again after everything vanishes
-                setTimeout(() => {
-                    document.querySelector("button").style.display = "block";
-                }, 1000); // Delay showing button after "Created with Love"
-            }, 15000); // Vanish after 15 seconds (adjust timing as needed)
+        // Function for Revisit Button
+        function revisit() {
+            isRevisitClicked = true;
+            clearInterval(slideInterval); // Stop the slideshow
+            document.getElementById("revisitButton").style.display = "none"; // Hide revisit button after click
         }
 
-        // Call stopSlideshow function after the slideshow stops
-        setTimeout(stopSlideshow, 15000); // Stop slideshow after 15 seconds
+        // Call startShow when the page loads
+        document.getElementById("startButton").style.display = "block"; // Display the "Surprise Awaits!" button initially
     </script>
 </body>
-</html> 
-
+</html>
