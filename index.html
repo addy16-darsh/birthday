@@ -58,27 +58,8 @@
             z-index: 2;
         }
 
-        .side-message {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            font-style: italic;
-            font-weight: normal;  /* Unbold side message */
-            line-height: 1.5;
-            max-width: 80%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            z-index: 2;
-        }
-
         .quote {
-            font-family: 'Impact', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             font-size: 1.0rem;
             color: rgba(255, 255, 255, 0.8);
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
@@ -87,6 +68,7 @@
             opacity: 0;
             transition: opacity 2s;
             z-index: 2;
+            font-weight: normal;  /* Unbold quotes */
         }
 
         .quote-top-left {
@@ -183,14 +165,6 @@
         Have an unforgettable birthday, my friend!
     </div>
 
-    <!-- Side message -->
-    <div class="side-message" id="sideMessage">
-        I can’t even begin to explain how much your friendship means to me. 
-        You’ve always been there, whether we’re laughing, joking, or even sharing moments of silence. 
-        You’re the kind of person I’d always want by my side. 
-        Enjoy every moment of this day, and here’s to a future filled with even more amazing moments!
-    </div>
-
     <!-- Quotes at corners -->
     <div class="quote quote-top-left">"Pookie, eat more!<br>You’re not going to grow taller by staring at your food 😒"</div>
     <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched🍼"</div>
@@ -248,26 +222,6 @@
                     }, index * 500);  // Adjust the delay (500ms between words)
                 });
 
-                // Start revealing the side message word by word
-                let sideMessage = document.getElementById("sideMessage");
-                let sideWords = sideMessage.innerText.split(" ");
-                sideMessage.innerHTML = '';  // Clear the current text
-                
-                sideWords.forEach((word, index) => {
-                    setTimeout(() => {
-                        let span = document.createElement('span');
-                        span.innerText = word + ' ';
-                        span.style.opacity = 0;  // Start with opacity 0
-                        span.style.transition = "opacity 1s ease-in-out";  // Apply fade-in effect
-                        sideMessage.appendChild(span);
-
-                        // Fade in each word
-                        setTimeout(() => {
-                            span.style.opacity = 1;
-                        }, 100);  // Start fading in each word immediately
-                    }, index * 500);  // Adjust the delay (500ms between words)
-                });
-
                 // Fade in the quotes
                 const quotes = document.querySelectorAll(".quote");
                 quotes.forEach((quote, index) => {
@@ -300,7 +254,6 @@
             setTimeout(() => {
                 document.getElementById("title").style.display = "none";
                 document.getElementById("mainMessage").style.display = "none";
-                document.getElementById("sideMessage").style.display = "none";
                 const quotes = document.querySelectorAll(".quote");
                 quotes.forEach((quote) => {
                     quote.style.display = "none";
