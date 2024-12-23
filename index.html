@@ -214,7 +214,7 @@
                 document.getElementById("title").style.transition = "transform 1s ease-in-out";
 
                 // Start the slideshow
-                slideInterval = setInterval(showSlides, 8000); // Change slide every 5 seconds
+                slideInterval = setInterval(showSlides, 5000); // Change slide every 5 seconds
 
                 // Show main messages one by one
                 showMainMessage();
@@ -256,7 +256,7 @@
                     messages[messageIndex].style.opacity = "0"; // Hide the current message after 3 seconds
                     messageIndex++;
                     showMainMessage(); // Call the function recursively for the next message
-                }, 85000); // Display each message for 3 seconds
+                }, 5000); // Display each message for 3 seconds
             }
         }
 
