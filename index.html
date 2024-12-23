@@ -177,6 +177,7 @@
 
     <script>
         let slideIndex = 0;
+        let slideInterval;
 
         function startShow() {
             const title = document.getElementById("title");
@@ -193,17 +194,22 @@
             });
 
             const slides = document.querySelectorAll(".mySlides");
-            setInterval(() => {
+            slideInterval = setInterval(() => {
                 slides.forEach(slide => slide.style.display = "none");
                 slideIndex = (slideIndex + 1) % slides.length;
                 slides[slideIndex].style.display = "block";
             }, 3000);
 
-            setTimeout(() => document.getElementById("createdWithLove").classList.add("visible"), 15000);
+            // Show "Created with Love" after 15 seconds
+            setTimeout(() => {
+                document.getElementById("createdWithLove").classList.add("visible");
+                clearInterval(slideInterval); // Stop the slideshow
+            }, 15000); // Adjust this based on your slideshow length
+
+            // Hide the button after it's clicked
             document.querySelector("button").style.display = "none";
         }
     </script>
 
 </body>
 </html>
-
