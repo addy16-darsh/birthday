@@ -156,14 +156,21 @@
     <!-- Title -->
     <h1 id="title">🎉 Happy 21st Birthday, Pookie! 🎉</h1>
 
-    <!-- Main message -->
-    <div class="main-message" id="mainMessage">
-        <p id="firstParagraph">
-            Happy 21st Birthday, Pookie! 🎉 Bro, I still can’t wrap my head around the fact that it’s only been six months since you walked into my life because it feels like you’ve been part of it forever. 🫶 You didn’t just become my friend—you became my brother, my partner-in-crime, and my biggest supporter. 🙌 You’ve brought so much light, laughter, and realness into my world that I honestly don’t know how I was doing life before you came along.
+    <!-- Main messages -->
+    <div class="main-message" id="mainMessage1">
+        <p>
+          Happy 21st Birthday, Pookie! 🎉 Bro, how is it that you still manage to have the most messed-up sleep schedule ever? 😂 Like, who needs sleep when you can stay up until 3 AM for no reason and then crash at 6 PM like it’s totally normal? 😴 You’ve turned “napping at random times” into an art form, and honestly, it’s impressive in the weirdest way. But hey, at least you’re living life on your own terms, even if your sleep pattern is an absolute mess. 🙌
+    </div>
+
+    <div class="main-message" id="mainMessage2" style="display: none;">
+        <p>
+            Taking care of you, Pookie, has been a blessing (even though you sometimes make it feel like babysitting a 21-year-old toddler with a PhD in being cute 🍼). 🌟 But honestly, I wouldn’t trade it for anything. You’ve taught me what it means to show up for someone—whether it’s hyping me up, being my rock when I need it most, or just making me laugh until my stomach hurts. You’re not just cute—you’re pure magic wrapped in a ball of chaos, and my life’s been so much brighter since you showed up. 💫
         </p>
-        <p id="secondParagraph" style="display: none;">
-            You’ve changed my life in ways I didn’t even think were possible. 🌟 You’ve taught me what it means to truly show up for someone and how powerful it feels to have someone show up for you without hesitation. 💯 You’re not just a friend; you’re my day one, my ride-or-die, my family. Love you, bro. ❤️‍🔥
-        </p>
+    </div>
+
+    <div class="main-message" id="mainMessage3" style="display: none;">
+        <p>
+           Here’s to more laughs, more epic memories, and me always having your back (even if it means reminding you to eat, sit properly, or stop being too adorable for your own good). Love you, bro. ❤️‍🔥 Never forget how much you mean to me, Pookie. I might threaten to dump you for your cuteness overload, but you know I’m always gonna be there for you. Let’s make this year even crazier than the last! 🎂
     </div>
 
     <!-- Quotes at corners -->
@@ -195,13 +202,19 @@
                 document.getElementById("title").style.transform = "translate(-50%, 0)";
                 document.getElementById("title").style.top = "5%";
 
-                document.querySelector("#firstParagraph").style.opacity = 1;
+                document.querySelector("#mainMessage1 p").style.opacity = 1;
 
                 setTimeout(() => {
-                    const secondParagraph = document.getElementById("secondParagraph");
-                    secondParagraph.style.display = "block";
-                    secondParagraph.style.opacity = 1;
+                    const secondMessage = document.getElementById("mainMessage2");
+                    secondMessage.style.display = "block";
+                    secondMessage.querySelector("p").style.opacity = 1;
                 }, 3000);
+
+                setTimeout(() => {
+                    const thirdMessage = document.getElementById("mainMessage3");
+                    thirdMessage.style.display = "block";
+                    thirdMessage.querySelector("p").style.opacity = 1;
+                }, 6000);
 
                 const quotes = document.querySelectorAll(".quote");
                 quotes.forEach((quote, index) => {
