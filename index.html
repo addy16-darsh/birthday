@@ -199,6 +199,7 @@
 
     <script>
         let slideIndex = 0;
+        let messageIndex = 0;
         let slideInterval;
 
         // Function to start the slideshow and show messages
@@ -207,7 +208,7 @@
             document.getElementById("title").style.display = "block";
 
             // Wait for 2 seconds before moving the title to the top
-            setTimeout(function() {
+            setTimeout(function () {
                 document.getElementById("title").style.transform = "translate(-50%, 0)";
                 document.getElementById("title").style.top = "5%";
                 document.getElementById("title").style.transition = "transform 1s ease-in-out";
@@ -215,14 +216,8 @@
                 // Start the slideshow
                 slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-                // Fade in the main messages
-                document.getElementById("mainMessage1").style.opacity = "1";
-                setTimeout(() => {
-                    document.getElementById("mainMessage2").style.opacity = "1";
-                }, 3000); // Delay message 2 by 3 seconds
-                setTimeout(() => {
-                    document.getElementById("mainMessage3").style.opacity = "1";
-                }, 6000); // Delay message 3 by 6 seconds
+                // Show main messages one by one
+                showMainMessage();
 
                 // Fade in the quotes
                 const quotes = document.querySelectorAll(".quote");
@@ -241,23 +236,41 @@
         function showSlides() {
             let slides = document.getElementsByClassName("mySlides");
             for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
+                slides[i].style.display = "none";
             }
             slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].style.display = "block";
+        }
+
+        // Function to show main messages one by one
+        function showMainMessage() {
+            const messages = document.querySelectorAll(".main-message");
+            messages.forEach((message) => (message.style.opacity = "0")); // Hide all messages
+
+            if (messageIndex < messages.length) {
+                messages[messageIndex].style.opacity = "1"; // Show the current message
+                setTimeout(() => {
+                    messages[messageIndex].style.opacity = "0"; // Hide the current message after 3 seconds
+                    messageIndex++;
+                    showMainMessage(); // Call the function recursively for the next message
+                }, 3000); // Display each message for 3 seconds
+            }
         }
 
         // Function to stop the slideshow and vanish everything after the last animation
         function stopSlideshow() {
-            clearInterval(slideInterval);  // Stop slideshow
+            clearInterval(slideInterval); // Stop slideshow
 
             // Vanish all the content
             setTimeout(() => {
                 document.getElementById("title").style.display = "none";
-                document.getElementById("mainMessage1").style.display = "none";
-                document.getElementById("mainMessage2").style.display = "none";
-                document.getElementById("mainMessage3").style.display = "none";
+                const messages = document.querySelectorAll(".main-message");
+                messages.forEach((message) => {
+                    message.style.display = "none";
+                });
                 const quotes = document.querySelectorAll(".quote");
                 quotes.forEach((quote) => {
                     quote.style.display = "none";
@@ -276,6 +289,5 @@
         // Call stopSlideshow function after the slideshow stops
         setTimeout(stopSlideshow, 15000); // Stop slideshow after 15 seconds
     </script>
-
 </body>
 </html>
