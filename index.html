@@ -22,6 +22,7 @@
             position: relative;
             overflow: hidden;
             flex-direction: column;
+            text-align: center;
         }
 
         h1 {
@@ -37,6 +38,11 @@
             font-weight: bold;
             display: none;
             transition: transform 1s ease-in-out;
+        }
+
+        .message-container {
+            position: relative;
+            z-index: 2;
         }
 
         .main-message {
@@ -57,7 +63,6 @@
             z-index: 2;
         }
 
-        /* Adjusted spacing between the messages */
         #mainMessage1 {
             top: 20%;
         }
@@ -67,39 +72,7 @@
         }
 
         #mainMessage3 {
-            top: 65%;
-        }
-
-        .quote {
-            font-family: 'Impact', sans-serif;
-            font-size: 1.0rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            font-style: italic;
-            opacity: 0;
-            transition: opacity 2s;
-            z-index: 2;
-        }
-
-        .quote-top-left {
-            top: 5%;
-            left: 5%;
-        }
-
-        .quote-top-right {
-            top: 5%;
-            right: 5%;
-        }
-
-        .quote-bottom-left {
-            bottom: 5%;
-            left: 5%;
-        }
-
-        .quote-bottom-right {
-            bottom: 5%;
-            right: 5%;
+            top: 60%;
         }
 
         .slideshow-container {
@@ -153,11 +126,6 @@
             transition: opacity 2s;
             z-index: 2;
         }
-
-        @keyframes fadeInQuote {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -178,12 +146,6 @@
         </div>
     </div>
 
-    <!-- Quotes at corners -->
-    <div class="quote quote-top-left">"Pookie, eat more<br> You’re not going to grow taller by staring at your food 😒"</div>
-    <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched 🍼"</div>
-    <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>The more I wonder what trouble you're planning."</div>
-    <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise 😘🎀"</div>
-
     <!-- Slideshow container -->
     <div class="slideshow-container">
         <img class="mySlides" src="static/image1.jpg" alt="Image 1">
@@ -199,7 +161,6 @@
 
     <script>
         let slideIndex = 0;
-        let messageIndex = 0;
         let slideInterval;
 
         // Function to start the slideshow and show messages
@@ -208,61 +169,47 @@
             document.getElementById("title").style.display = "block";
 
             // Wait for 2 seconds before moving the title to the top
-            setTimeout(function () {
+            setTimeout(function() {
                 document.getElementById("title").style.transform = "translate(-50%, 0)";
                 document.getElementById("title").style.top = "5%";
                 document.getElementById("title").style.transition = "transform 1s ease-in-out";
 
                 // Start the slideshow
-                slideInterval = setInterval(showSlides, 4000); // Change slide every 5 seconds
+                slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-                // Show main messages one by one
-                showMainMessage();
-
-                // Fade in the quotes
-                const quotes = document.querySelectorAll(".quote");
-                quotes.forEach((quote, index) => {
-                    setTimeout(() => {
-                        quote.style.opacity = "1";
-                    }, 2000 * index); // Delay each quote appearing
-                });
-
+                // Fade in the main messages and slideshow at the same time
+                showNextMessageAndSlide();
+                
                 // Hide the start button after starting the animation
                 document.querySelector("button").style.display = "none";
-            }, 3500); // Wait 2 seconds before moving the title to the top
+            }, 2000); // Wait 2 seconds before moving the title to the top
         }
 
-        // Function to show slides
-        function showSlides() {
+        // Function to show slides and messages in sync
+        function showNextMessageAndSlide() {
             let slides = document.getElementsByClassName("mySlides");
+            let messages = document.querySelectorAll(".main-message");
+            
+            // Hide all slides and messages first
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
+            for (let i = 0; i < messages.length; i++) {
+                messages[i].style.opacity = "0";
+            }
+
+            // Increment the index
             slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
+            if (slideIndex > slides.length) { slideIndex = 1 }
+
+            // Show the current slide and message
             slides[slideIndex - 1].style.display = "block";
-        }
-
-        // Function to show main messages one by one
-        function showMainMessage() {
-            const messages = document.querySelectorAll(".main-message");
-            messages.forEach((message) => (message.style.opacity = "0")); // Hide all messages
-
-            if (messageIndex < messages.length) {
-                messages[messageIndex].style.opacity = "1"; // Show the current message
-                setTimeout(() => {
-                    messages[messageIndex].style.opacity = "0"; // Hide the current message after 3 seconds
-                    messageIndex++;
-                    showMainMessage(); // Call the function recursively for the next message
-                }, 5000); // Display each message for 3 seconds
-            }
+            messages[slideIndex - 1].style.opacity = "1";
         }
 
         // Function to stop the slideshow and vanish everything after the last animation
         function stopSlideshow() {
-            clearInterval(slideInterval); // Stop slideshow
+            clearInterval(slideInterval);  // Stop slideshow
 
             // Vanish all the content
             setTimeout(() => {
@@ -289,5 +236,6 @@
         // Call stopSlideshow function after the slideshow stops
         setTimeout(stopSlideshow, 15000); // Stop slideshow after 15 seconds
     </script>
+
 </body>
 </html>
