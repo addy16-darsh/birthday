@@ -216,6 +216,13 @@
                 // Hide the start button after starting the animation
                 document.querySelector("button").style.display = "none";
             }, 2000); // Wait 2 seconds before moving the title to top
+
+            // Stop the slideshow after 2 minutes (120 seconds) and show the "Created with Love" message
+            setTimeout(function() {
+                clearInterval(slideInterval); // Stop the slideshow
+                document.getElementById("createdWithLove").style.opacity = 1; // Show "Created with Love"
+                document.querySelector("button").style.display = "block"; // Show the button again
+            }, 120000); // 2 minutes
         }
 
         // Function to show slides
@@ -228,7 +235,6 @@
             if (slideIndex > slides.length) {slideIndex = 1}    
             slides[slideIndex-1].style.display = "block";  
         }
-
     </script>
 
 </body>
