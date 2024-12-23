@@ -154,13 +154,13 @@
 
     <!-- Main message -->
     <div class="main-message" id="mainMessage">
-        {Happy 21st Birthday, Pookie! 🎉 
+        Happy 21st Birthday, Pookie! 🎉 
         It’s been an amazing journey of friendship and brotherhood. 
         From all the laughs to the challenges we've overcome together, you've been more than just a friend, 
         you've been a true brother. 
         Today, I just want to celebrate the incredible person you are and how lucky I am to have you in my life. 
         Here's to many more adventures, jokes, and memories. 
-        Have an unforgettable birthday, my friend!}
+        Have an unforgettable birthday, my friend!
     </div>
 
     <!-- Quotes at corners -->
@@ -200,8 +200,12 @@
                 // Start the slideshow
                 slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-                // Fade in the main message and quotes
-                document.getElementById("mainMessage").style.opacity = "1";
+                // Fade in the main message
+                setTimeout(() => {
+                    document.getElementById("mainMessage").style.opacity = "1";
+                }, 2500); // Add a slight delay before showing the message
+
+                // Fade in the quotes
                 const quotes = document.querySelectorAll(".quote");
                 quotes.forEach((quote, index) => {
                     setTimeout(() => {
@@ -254,4 +258,3 @@
 
 </body>
 </html>
-
