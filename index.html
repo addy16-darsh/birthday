@@ -22,34 +22,22 @@
             font-size: 2.5rem;
             color: #00b5e2;
             text-align: center;
-            display: none;
         }
 
-        .main-message {
+        .main-message, .created-with-love {
             font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.9);
             text-align: center;
             display: none;
             opacity: 0;
-            transition: opacity 2s;
+            transition: opacity 1s;
         }
 
-        .slideshow-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .mySlides {
+        .slideshow-container img {
             display: none;
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
         }
 
         button {
@@ -60,110 +48,102 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            position: absolute;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
             display: none;
+            margin-top: 20px;
         }
 
-        .created-with-love {
-            font-size: 1.8rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            display: none;
-            opacity: 0;
-            transition: opacity 2s;
+        #startButton {
+            display: block;
         }
     </style>
 </head>
 <body>
 
-    <!-- Title -->
-    <h1 id="title">🎉 Happy 21st Birthday, Pookie! 🎉</h1>
+    <h1>🎉 Happy 21st Birthday, Pookie! 🎉</h1>
 
-    <!-- Main messages -->
-    <div class="main-message" id="mainMessage1">
-        <p>Happy 21st Birthday, Pookie! 🎉</p>
-    </div>
-    <div class="main-message" id="mainMessage2">
-        <p>You're the best, Pookie! Enjoy your special day! ❤️</p>
-    </div>
-    <div class="main-message" id="mainMessage3">
-        <p>Love you, bro! Here's to many more fun memories! 🎂</p>
-    </div>
+    <div class="main-message" id="message1">You’re amazing! Enjoy your special day! ❤️</div>
+    <div class="main-message" id="message2">Here’s to creating more memories! 🎂</div>
+    <div class="main-message" id="message3">Love you, Pookie! 🎉</div>
 
-    <!-- Slideshow container -->
     <div class="slideshow-container">
-        <img class="mySlides" src="https://via.placeholder.com/600x400?text=Image+1" alt="Image 1">
-        <img class="mySlides" src="https://via.placeholder.com/600x400?text=Image+2" alt="Image 2">
-        <img class="mySlides" src="https://via.placeholder.com/600x400?text=Image+3" alt="Image 3">
+        <img src="https://via.placeholder.com/600x400?text=Image+1" class="mySlides">
+        <img src="https://via.placeholder.com/600x400?text=Image+2" class="mySlides">
+        <img src="https://via.placeholder.com/600x400?text=Image+3" class="mySlides">
     </div>
 
-    <!-- Created with love message -->
     <div class="created-with-love" id="createdWithLove">Created with Love ❤️</div>
 
-    <!-- Surprise Awaits Button -->
     <button id="startButton" onclick="startShow()">Surprise Awaits!</button>
-
-    <!-- Revisit Button -->
     <button id="revisitButton" onclick="revisit()">Revisit</button>
 
     <script>
         let slideIndex = 0;
         let messageIndex = 0;
         let slideInterval;
+        let messages = document.querySelectorAll(".main-message");
+        let slides = document.querySelectorAll(".mySlides");
 
-        // Function to start the slideshow and show messages
         function startShow() {
-            document.getElementById("title").style.display = "block";
-
-            setTimeout(function () {
-                document.getElementById("title").style.display = "none"; // Hide the title after the animation
-                slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
-                showMainMessage();
-                document.getElementById("startButton").style.display = "none";
-            }, 2000); // Wait 2 seconds before starting the show
+            document.getElementById("startButton").style.display = "none"; // Hide "Surprise Awaits" button
+            showSlides();
+            showMessages();
         }
 
-        // Function to show slides
         function showSlides() {
-            let slides = document.getElementsByClassName("mySlides");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-                document.getElementById("createdWithLove").style.opacity = "1";
-                setTimeout(() => {
-                    document.getElementById("revisitButton").style.display = "block";
-                }, 500);
-            }
-            slides[slideIndex - 1].style.display = "block";
+            slideInterval = setInterval(() => {
+                // Hide all slides
+                slides.forEach(slide => slide.style.display = "none");
+
+                // Show current slide
+                slides[slideIndex].style.display = "block";
+
+                // Move to next slide or stop if it's the last one
+                slideIndex++;
+                if (slideIndex >= slides.length) {
+                    clearInterval(slideInterval);
+                    showFinalMessage();
+                }
+            }, 3000);
         }
 
-        // Function to show main messages
-        function showMainMessage() {
-            const messages = document.querySelectorAll(".main-message");
+        function showMessages() {
+            const messageInterval = 3000;
             messages.forEach((message, index) => {
                 setTimeout(() => {
-                    message.style.opacity = "1"; // Show the current message
-                    setTimeout(() => {
-                        message.style.opacity = "0"; // Hide the current message after 3 seconds
-                    }, 3000);
-                }, index * 3000); // Delay each message
+                    message.style.opacity = "1";
+                    message.style.display = "block";
+                }, index * messageInterval);
+
+                setTimeout(() => {
+                    message.style.opacity = "0";
+                }, (index + 1) * messageInterval);
             });
         }
 
-        // Function for Revisit Button
+        function showFinalMessage() {
+            document.getElementById("createdWithLove").style.opacity = "1";
+            document.getElementById("createdWithLove").style.display = "block";
+            document.getElementById("revisitButton").style.display = "block"; // Show "Revisit" button
+        }
+
         function revisit() {
-            clearInterval(slideInterval); // Stop the slideshow
+            clearInterval(slideInterval); // Stop any ongoing slideshow
+
+            // Reset all states
             slideIndex = 0;
             messageIndex = 0;
+
+            messages.forEach(message => {
+                message.style.display = "none";
+                message.style.opacity = "0";
+            });
+
+            slides.forEach(slide => slide.style.display = "none");
+
+            document.getElementById("createdWithLove").style.display = "none";
             document.getElementById("createdWithLove").style.opacity = "0";
             document.getElementById("revisitButton").style.display = "none";
-            startShow(); // Restart the slideshow
+            document.getElementById("startButton").style.display = "block"; // Show "Surprise Awaits" button
         }
     </script>
 </body>
