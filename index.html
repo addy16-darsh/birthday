@@ -41,8 +41,7 @@
 
         .main-message {
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.0rem;  /* Reduced size of main message */
-            font-weight: bold;  /* Make main message bold */
+            font-size: 1.5rem;
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
             position: absolute;
@@ -54,7 +53,7 @@
             line-height: 1.5;
             max-width: 80%;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 2s;
             z-index: 2;
         }
 
@@ -167,7 +166,7 @@
     <!-- Quotes at corners -->
     <div class="quote quote-top-left">"Pookie, eat more!<br>You’re not going to grow taller by staring at your food 😒"</div>
     <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched🍼"</div>
-    <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>the more I wonder what trouble you're planning."</div>
+    <div class="quote quote-bottom-left">"NPookie, talk more! The quieter you get, <br>the more I wonder what trouble you're planning."</div>
     <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise😘🎀"</div>
 
     <!-- Slideshow container -->
@@ -197,13 +196,14 @@
                 document.getElementById("title").style.transform = "translate(-50%, 0)";
                 document.getElementById("title").style.top = "5%";
                 document.getElementById("title").style.transition = "transform 1s ease-in-out";
-
+                
                 // Start the slideshow
                 slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-                // Start fading in the main message
-                let mainMessage = document.getElementById("mainMessage");
-                mainMessage.style.opacity = 1; // Ensure opacity is set to 1 to make it visible
+                // Fade in the main message
+                setTimeout(() => {
+                    document.getElementById("mainMessage").style.opacity = "1";
+                }, 2500); // Add a slight delay before showing the message
 
                 // Fade in the quotes
                 const quotes = document.querySelectorAll(".quote");
@@ -229,9 +229,33 @@
             slides[slideIndex-1].style.display = "block";  
         }
 
+        // Function to stop the slideshow and vanish everything after the last animation
+        function stopSlideshow() {
+            clearInterval(slideInterval);  // Stop slideshow
+
+            // Vanish all the content
+            setTimeout(() => {
+                document.getElementById("title").style.display = "none";
+                document.getElementById("mainMessage").style.display = "none";
+                const quotes = document.querySelectorAll(".quote");
+                quotes.forEach((quote) => {
+                    quote.style.display = "none";
+                });
+
+                // Show "Created with Love"
+                document.getElementById("createdWithLove").style.opacity = "1";
+
+                // Show the button again after everything vanishes
+                setTimeout(() => {
+                    document.querySelector("button").style.display = "block";
+                }, 1000); // Delay showing button after "Created with Love"
+            }, 15000); // Vanish after 15 seconds (adjust timing as needed)
+        }
+
+        // Call stopSlideshow function after the slideshow stops
+        setTimeout(stopSlideshow, 15000); // Stop slideshow after 15 seconds
     </script>
 
 </body>
 </html>
-
 
