@@ -41,7 +41,8 @@
 
         .main-message {
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;  /* Reduced size of main message */
+            font-weight: bold;  /* Make main message bold */
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
             position: absolute;
@@ -202,6 +203,8 @@
 
                 // Start revealing the main message word by word
                 let mainMessage = document.getElementById("mainMessage");
+                mainMessage.style.opacity = 1; // Ensure opacity is set to 1 to make it visible
+                
                 let words = mainMessage.innerText.split(" ");
                 mainMessage.innerHTML = '';  // Clear the current text
                 
