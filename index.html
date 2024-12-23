@@ -41,7 +41,7 @@
 
         .main-message {
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.2rem;  /* Reduced size of main message */
+            font-size: 1.0rem;  /* Reduced size of main message */
             font-weight: bold;  /* Make main message bold */
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
@@ -201,27 +201,9 @@
                 // Start the slideshow
                 slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-                // Start revealing the main message word by word
+                // Start fading in the main message
                 let mainMessage = document.getElementById("mainMessage");
                 mainMessage.style.opacity = 1; // Ensure opacity is set to 1 to make it visible
-                
-                let words = mainMessage.innerText.split(" ");
-                mainMessage.innerHTML = '';  // Clear the current text
-                
-                words.forEach((word, index) => {
-                    setTimeout(() => {
-                        let span = document.createElement('span');
-                        span.innerText = word + ' ';
-                        span.style.opacity = 0;  // Start with opacity 0
-                        span.style.transition = "opacity 1s ease-in-out";  // Apply fade-in effect
-                        mainMessage.appendChild(span);
-
-                        // Fade in each word
-                        setTimeout(() => {
-                            span.style.opacity = 1;
-                        }, 100);  // Start fading in each word immediately
-                    }, index * 500);  // Adjust the delay (500ms between words)
-                });
 
                 // Fade in the quotes
                 const quotes = document.querySelectorAll(".quote");
@@ -247,33 +229,9 @@
             slides[slideIndex-1].style.display = "block";  
         }
 
-        // Function to stop the slideshow and vanish everything after the last animation
-        function stopSlideshow() {
-            clearInterval(slideInterval);  // Stop slideshow
-
-            // Vanish all the content
-            setTimeout(() => {
-                document.getElementById("title").style.display = "none";
-                document.getElementById("mainMessage").style.display = "none";
-                const quotes = document.querySelectorAll(".quote");
-                quotes.forEach((quote) => {
-                    quote.style.display = "none";
-                });
-
-                // Show "Created with Love"
-                document.getElementById("createdWithLove").style.opacity = "1";
-
-                // Show the button again after everything vanishes
-                setTimeout(() => {
-                    document.querySelector("button").style.display = "block";
-                }, 1000); // Delay showing button after "Created with Love"
-            }, 15000); // Vanish after 15 seconds (adjust timing as needed)
-        }
-
-        // Call stopSlideshow function after the slideshow stops
-        setTimeout(stopSlideshow, 15000); // Stop slideshow after 15 seconds
     </script>
 
 </body>
 </html>
+
 
