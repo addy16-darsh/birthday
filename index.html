@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Happy 21st Birthday, Pookie! 🎉</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Impact&family=Oswald:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@100;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0d1b2a;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-family: 'Impact', sans-serif;
+            font-size: 2.5rem;
+            color: #00b5e2;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-style: italic;
+            font-weight: bold;
+            display: none;
+            transition: transform 1s ease-in-out;
+        }
+
+        .main-message {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-style: italic;
+            line-height: 1.5;
+            max-width: 80%;
+            opacity: 0;
+            transition: opacity 2s;
+            z-index: 2;
+        }
+
+        .quote {
+            font-family: 'Impact', sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 2s;
+            z-index: 2;
+        }
+
+        .quote-top-left {
+            top: 5%;
+            left: 5%;
+        }
+
+        .quote-top-right {
+            top: 5%;
+            right: 5%;
+        }
+
+        .quote-bottom-left {
+            bottom: 5%;
+            left: 5%;
+        }
+
+        .quote-bottom-right {
+            bottom: 5%;
+            right: 5%;
+        }
+
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            object-fit: contain;
+        }
+
+        .mySlides {
+            display: none;
+            object-fit: contain;
+            width: auto;
+            height: 100%;
+        }
+
+        button {
+            background-color: #00b5e2;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: block;
+        }
+
+        .created-with-love {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 2s;
+            z-index: 2;
+        }
+
+        @keyframes fadeInQuote {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Title -->
+    <h1 id="title">🎉 Happy 21st Birthday, Pookie! 🎉</h1>
+
+    <!-- Main message -->
+    <div class="main-message" id="mainMessage">
+        {{ main_message }}
+    </div>
+
+    <!-- Quotes at corners -->
+    <div class="quote quote-top-left">"You are the peanut butter to my jelly!"</div>
+    <div class="quote quote-top-right">"Friends are the siblings God never gave us!"</div>
+    <div class="quote quote-bottom-left">"Not brothers by blood, but brothers by choice!"</div>
+    <div class="quote quote-bottom-right">"Brothers before others!"</div>
+
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
+        <img class="mySlides" src="static/image1.jpg" alt="Image 1">
+        <img class="mySlides" src="static/image2.jpg" alt="Image 2">
+        <img class="mySlides" src="static/image3.png" alt="Image 3">
+    </div>
+
+    <!-- Created with love message -->
+    <div class="created-with-love" id="createdWithLove">Created with Love</div>
+
+    <!-- Button to start -->
+    <button onclick="startShow()">Click to View Surprise</button>
+
+    <script>
+        let slideIndex = 0;
+        let slideInterval;
+
+        // Function to start the slideshow and show messages
+        function startShow() {
+            // Show the title in the center
+            document.getElementById("title").style.display = "block";
+
+            // Wait for 2 seconds before moving the title to the top
+            setTimeout(function() {
+                document.getElementById("title").style.transform = "translate(-50%, 0)";
+                document.getElementById("title").style.top = "5%";
+                document.getElementById("title").style.transition = "transform 1s ease-in-out";
+                
+                // Start the slideshow
+                slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
+
+                // Fade in the main message and quotes
+                document.getElementById("mainMessage").style.opacity = "1";
+                const quotes = document.querySelectorAll(".quote");
+                quotes.forEach((quote, index) => {
+                    setTimeout(() => {
+                        quote.style.opacity = "1";
+                    }, 2000 * index); // Delay each quote appearing
+                });
+
+                // Hide the start button after starting the animation
+                document.querySelector("button").style.display = "none";
+            }, 2000); // Wait 2 seconds before moving the title to top
+        }
+
+        // Function to show slides
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+        }
+
+        // Function to stop the slideshow and vanish everything after the last animation
+        function stopSlideshow() {
+            clearInterval(slideInterval);  // Stop slideshow
+
+            // Vanish all the content
+            setTimeout(() => {
+                document.getElementById("title").style.display = "none";
+                document.getElementById("mainMessage").style.display = "none";
+                const quotes = document.querySelectorAll(".quote");
+                quotes.forEach((quote) => {
+                    quote.style.display = "none";
+                });
+
+                // Show "Created with Love"
+                document.getElementById("createdWithLove").style.opacity = "1";
+
+                // Show the button again after everything vanishes
+                setTimeout(() => {
+                    document.querySelector("button").style.display = "block";
+                }, 1000); // Delay showing button after "Created with Love"
+            }, 15000); // Vanish after 15 seconds (adjust timing as needed)
+        }
+
+        // Call stopSlideshow function after the slideshow stops
+        setTimeout(stopSlideshow, 15000); // Stop slideshow after 15 seconds
+    </script>
+
+</body>
+</html>
