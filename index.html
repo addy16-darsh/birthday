@@ -43,7 +43,7 @@
             font-family: 'Quicksand', sans-serif;
             font-size: 1.0rem;
             font-weight: bold;
-            color: rgba(169, 169, 169, 0.7); /* Transparent grey color */
+            color: rgba(255, 255, 255, 0.9);
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
             position: absolute;
             top: 20%;
@@ -54,7 +54,7 @@
             line-height: 1.5;
             max-width: 80%;
             z-index: 2;
-            opacity: 0; /* Initially hidden */
+            opacity: 0;
             transition: opacity 1s ease-in-out;
         }
 
@@ -141,19 +141,12 @@
             transition: opacity 2s;
             z-index: 2;
         }
-
-        @keyframes fadeInQuote {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Title -->
     <h1 id="title">🎉 Happy 21st Birthday, Pookie! 🎉</h1>
 
-    <!-- Main messages -->
     <div class="main-message" id="mainMessage1">
         <p>
           Happy 21st Birthday, Pookie! 🎉 Bro, how is it that you still manage to have the most messed-up sleep schedule ever? 😂 Like, who needs sleep when you can stay up until 3 AM for no reason and then crash at 6 PM like it’s totally normal? 😴 You’ve turned “napping at random times” into an art form, and honestly, it’s impressive in the weirdest way. But hey, at least you’re living life on your own terms, even if your sleep pattern is an absolute mess. 🙌
@@ -172,23 +165,19 @@
         </p>
     </div>
 
-    <!-- Quotes at corners -->
     <div class="quote quote-top-left">"Pookie, eat more!<br>You’re not going to grow taller by staring at your food 😒"</div>
     <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched 🍼"</div>
     <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>the more I wonder what trouble you're planning."</div>
     <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise 😘🎀"</div>
 
-    <!-- Slideshow container -->
     <div class="slideshow-container">
         <img class="mySlides" src="static/image1.jpg" alt="Image 1">
         <img class="mySlides" src="static/image2.jpeg" alt="Image 2">
         <img class="mySlides" src="static/image3.png" alt="Image 3">
     </div>
 
-    <!-- Created with love message -->
     <div class="created-with-love" id="createdWithLove">Created with Love</div>
 
-    <!-- Button to start -->
     <button onclick="startShow()">Click to View Surprise</button>
 
     <script>
@@ -197,28 +186,23 @@
 
         function startShow() {
             document.getElementById("title").style.display = "block";
+            document.querySelector("#title").style.transform = "translate(-50%, -50%)";
+            
             setTimeout(function () {
-                document.getElementById("title").style.transform = "translate(-50%, 0)";
-                document.getElementById("title").style.top = "5%";
-
-                document.querySelector("#mainMessage1 p").style.opacity = 1;
-
+                document.querySelector("#mainMessage1").style.opacity = 1;
                 setTimeout(() => {
-                    const secondMessage = document.getElementById("mainMessage2");
-                    secondMessage.style.display = "block";
-                    secondMessage.querySelector("p").style.opacity = 1;
+                    document.getElementById("mainMessage2").style.display = "block";
+                    document.querySelector("#mainMessage2").style.opacity = 1;
                 }, 3000);
 
                 setTimeout(() => {
-                    const thirdMessage = document.getElementById("mainMessage3");
-                    thirdMessage.style.display = "block";
-                    thirdMessage.querySelector("p").style.opacity = 1;
+                    document.getElementById("mainMessage3").style.display = "block";
+                    document.querySelector("#mainMessage3").style.opacity = 1;
                 }, 6000);
 
-                const quotes = document.querySelectorAll(".quote");
-                quotes.forEach((quote, index) => {
+                document.querySelectorAll(".quote").forEach((quote, index) => {
                     setTimeout(() => {
-                        quote.style.opacity = "1";
+                        quote.style.opacity = 1;
                     }, 2000 * index);
                 });
 
@@ -226,7 +210,7 @@
                 document.querySelector("button").style.display = "none";
             }, 2000);
 
-            setTimeout(function () {
+            setTimeout(() => {
                 clearInterval(slideInterval);
                 document.getElementById("createdWithLove").style.opacity = 1;
             }, 60000);
