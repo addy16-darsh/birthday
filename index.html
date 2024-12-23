@@ -156,8 +156,7 @@
     <!-- Main messages -->
     <div class="message-container">
         <div class="main-message" id="mainMessage1">
-            <p>Happy 21st Birthday, Pookie! 🎉 Bro, how is it that you still manage to have the most messed-up sleep schedule ever? 😂 Like, who needs sleep when you can stay up until 3 AM for no reason and then crash at 6 PM like it’s totally normal? 😴 You’ve turned “napping at random times” into an art form, and honestly, it’s impressive in the weirdest way. But hey, at least you’re living life on your own terms, even if your sleep pattern is an absolute mess. 🙌
-</p>
+            <p>Happy 21st Birthday, Pookie! 🎉 Bro, how is it that you still manage to have the most messed-up sleep schedule ever? 😂 Like, who needs sleep when you can stay up until 3 AM for no reason and then crash at 6 PM like it’s totally normal? 😴 You’ve turned “napping at random times” into an art form, and honestly, it’s impressive in the weirdest way. But hey, at least you’re living life on your own terms, even if your sleep pattern is an absolute mess. 🙌</p>
         </div>
         <div class="main-message" id="mainMessage2">
             <p>Taking care of you, Pookie, has been a blessing (even though you sometimes make it feel like babysitting a 21-year-old toddler with a PhD in being cute 🍼). 🌟 But honestly, I wouldn’t trade it for anything. You’ve taught me what it means to show up for someone—whether it’s hyping me up, being my rock when I need it most, or just making me laugh until my stomach hurts. You’re not just cute—you’re pure magic wrapped in a ball of chaos, and my life’s been so much brighter since you showed up. 💫</p>
@@ -168,11 +167,11 @@
     </div>
 
     <!-- Quotes at corners -->
-   
-     <div class="quote quote-top-left">"Pookie, eat more<br> You’re not going to grow taller by staring at your food 😒"</div>
+    <div class="quote quote-top-left">"Pookie, eat more<br> You’re not going to grow taller by staring at your food 😒"</div>
     <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched 🍼"</div>
     <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>The more I wonder what trouble you're planning."</div>
     <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise 😘🎀"</div>
+
     <!-- Slideshow container -->
     <div class="slideshow-container">
         <img class="mySlides" src="static/image1.jpg" alt="Image 1">
@@ -200,12 +199,20 @@
                 document.getElementById("title").style.transform = "translate(-50%, 0)";
                 document.getElementById("title").style.top = "5%";
                 document.getElementById("title").style.transition = "transform 1s ease-in-out";
-                
+
                 // Start the slideshow
                 slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-                // Fade in the main message and quotes
-                document.getElementById("mainMessage").style.opacity = "1";
+                // Fade in the main messages
+                document.getElementById("mainMessage1").style.opacity = "1";
+                setTimeout(() => {
+                    document.getElementById("mainMessage2").style.opacity = "1";
+                }, 3000); // Delay message 2 by 3 seconds
+                setTimeout(() => {
+                    document.getElementById("mainMessage3").style.opacity = "1";
+                }, 6000); // Delay message 3 by 6 seconds
+
+                // Fade in the quotes
                 const quotes = document.querySelectorAll(".quote");
                 quotes.forEach((quote, index) => {
                     setTimeout(() => {
@@ -215,7 +222,7 @@
 
                 // Hide the start button after starting the animation
                 document.querySelector("button").style.display = "none";
-            }, 2000); // Wait 2 seconds before moving the title to top
+            }, 2000); // Wait 2 seconds before moving the title to the top
         }
 
         // Function to show slides
@@ -236,7 +243,9 @@
             // Vanish all the content
             setTimeout(() => {
                 document.getElementById("title").style.display = "none";
-                document.getElementById("mainMessage").style.display = "none";
+                document.getElementById("mainMessage1").style.display = "none";
+                document.getElementById("mainMessage2").style.display = "none";
+                document.getElementById("mainMessage3").style.display = "none";
                 const quotes = document.querySelectorAll(".quote");
                 quotes.forEach((quote) => {
                     quote.style.display = "none";
