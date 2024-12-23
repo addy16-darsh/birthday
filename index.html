@@ -22,7 +22,6 @@
             position: relative;
             overflow: hidden;
             flex-direction: column;
-            text-align: center;
         }
 
         h1 {
@@ -36,13 +35,8 @@
             transform: translate(-50%, -50%);
             font-style: italic;
             font-weight: bold;
-            display: none;
+            display: block;
             transition: transform 1s ease-in-out;
-        }
-
-        .message-container {
-            position: relative;
-            z-index: 2;
         }
 
         .main-message {
@@ -63,17 +57,26 @@
             z-index: 2;
         }
 
-        #mainMessage1 {
-            top: 20%;
+        #mainMessage1 { top: 20%; }
+        #mainMessage2 { top: 40%; }
+        #mainMessage3 { top: 65%; }
+
+        .quote {
+            font-family: 'Impact', sans-serif;
+            font-size: 1.0rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 2s;
+            z-index: 2;
         }
 
-        #mainMessage2 {
-            top: 40%;
-        }
-
-        #mainMessage3 {
-            top: 60%;
-        }
+        .quote-top-left { top: 5%; left: 5%; }
+        .quote-top-right { top: 5%; right: 5%; }
+        .quote-bottom-left { bottom: 5%; left: 5%; }
+        .quote-bottom-right { bottom: 5%; right: 5%; }
 
         .slideshow-container {
             position: absolute;
@@ -108,7 +111,7 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
-            display: block;
+            display: none;
         }
 
         .created-with-love {
@@ -125,6 +128,20 @@
             opacity: 0;
             transition: opacity 2s;
             z-index: 2;
+        }
+
+        .revisit-btn {
+            background-color: #e84a5f;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 5%;
+            right: 20%;
+            display: none;
         }
     </style>
 </head>
@@ -146,6 +163,12 @@
         </div>
     </div>
 
+    <!-- Quotes at corners -->
+    <div class="quote quote-top-left">"Pookie, eat more<br> You’re not going to grow taller by staring at your food 😒"</div>
+    <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched 🍼"</div>
+    <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>The more I wonder what trouble you're planning."</div>
+    <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise 😘🎀"</div>
+
     <!-- Slideshow container -->
     <div class="slideshow-container">
         <img class="mySlides" src="static/image1.jpg" alt="Image 1">
@@ -156,86 +179,80 @@
     <!-- Created with love message -->
     <div class="created-with-love " id="createdWithLove">Created with Love ❤️</div>
 
-    <!-- Button to start -->
-    <button onclick="startShow()">Surprise Awaits!</button>
+    <!-- Revisit button -->
+    <button class="revisit-btn" onclick="revisit()">Revisit</button>
 
     <script>
         let slideIndex = 0;
+        let messageIndex = 0;
         let slideInterval;
 
         // Function to start the slideshow and show messages
         function startShow() {
-            // Show the title in the center
-            document.getElementById("title").style.display = "block";
+            // Start the slideshow
+            slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-            // Wait for 2 seconds before moving the title to the top
-            setTimeout(function() {
-                document.getElementById("title").style.transform = "translate(-50%, 0)";
-                document.getElementById("title").style.top = "5%";
-                document.getElementById("title").style.transition = "transform 1s ease-in-out";
+            // Show main messages one by one
+            showMainMessage();
 
-                // Start the slideshow
-                slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
+            // Fade in the quotes
+            const quotes = document.querySelectorAll(".quote");
+            quotes.forEach((quote, index) => {
+                setTimeout(() => {
+                    quote.style.opacity = "1";
+                }, 2000 * index); // Delay each quote appearing
+            });
 
-                // Fade in the main messages and slideshow at the same time
-                showNextMessageAndSlide();
-                
-                // Hide the start button after starting the animation
-                document.querySelector("button").style.display = "none";
-            }, 2000); // Wait 2 seconds before moving the title to the top
+            // Show "Created with Love"
+            setTimeout(() => {
+                document.getElementById("createdWithLove").style.opacity = "1";
+                document.querySelector(".revisit-btn").style.display = "block"; // Show Revisit button
+            }, 12000); // Show after the slides and messages
+
+            // Hide the start button
+            document.querySelector("button").style.display = "none";
         }
 
-        // Function to show slides and messages in sync
-        function showNextMessageAndSlide() {
+        // Function to show slides
+        function showSlides() {
             let slides = document.getElementsByClassName("mySlides");
-            let messages = document.querySelectorAll(".main-message");
-            
-            // Hide all slides and messages first
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
-            for (let i = 0; i < messages.length; i++) {
-                messages[i].style.opacity = "0";
-            }
-
-            // Increment the index
             slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1 }
-
-            // Show the current slide and message
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
             slides[slideIndex - 1].style.display = "block";
-            messages[slideIndex - 1].style.opacity = "1";
         }
 
-        // Function to stop the slideshow and vanish everything after the last animation
-        function stopSlideshow() {
-            clearInterval(slideInterval);  // Stop slideshow
+        // Function to show main messages one by one
+        function showMainMessage() {
+            const messages = document.querySelectorAll(".main-message");
+            messages.forEach((message) => (message.style.opacity = "0")); // Hide all messages
 
-            // Vanish all the content
-            setTimeout(() => {
-                document.getElementById("title").style.display = "none";
-                const messages = document.querySelectorAll(".main-message");
-                messages.forEach((message) => {
-                    message.style.display = "none";
-                });
-                const quotes = document.querySelectorAll(".quote");
-                quotes.forEach((quote) => {
-                    quote.style.display = "none";
-                });
-
-                // Show "Created with Love"
-                document.getElementById("createdWithLove").style.opacity = "1";
-
-                // Show the button again after everything vanishes
+            if (messageIndex < messages.length) {
+                messages[messageIndex].style.opacity = "1"; // Show the current message
                 setTimeout(() => {
-                    document.querySelector("button").style.display = "block";
-                }, 1000); // Delay showing button after "Created with Love"
-            }, 15000); // Vanish after 15 seconds (adjust timing as needed)
+                    messages[messageIndex].style.opacity = "0"; // Hide the current message after 3 seconds
+                    messageIndex++;
+                    showMainMessage(); // Call the function recursively for the next message
+                }, 3000); // Display each message for 3 seconds
+            }
         }
 
-        // Call stopSlideshow function after the slideshow stops
-        setTimeout(stopSlideshow, 15000); // Stop slideshow after 15 seconds
-    </script>
+        // Revisit function to reset everything
+        function revisit() {
+            slideIndex = 0;
+            messageIndex = 0;
+            document.getElementById("createdWithLove").style.opacity = "0";
+            document.querySelector(".revisit-btn").style.display = "none";
+            startShow(); // Restart the show
+        }
 
+        // Start the show automatically on load
+        window.onload = startShow;
+    </script>
 </body>
 </html>
+
