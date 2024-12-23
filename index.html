@@ -5,121 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 Happy 21st Birthday, Pookie! 🎉</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Impact&family=Oswald:wght@300;400&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@100;400&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
-
         body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
             background-color: #0d1b2a;
-            color: #fff;
-            height: 100vh;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            overflow: hidden;
+            height: 100vh;
+            margin: 0;
             flex-direction: column;
+            overflow: hidden;
         }
 
         h1 {
-            font-family: 'Impact', sans-serif;
             font-size: 2.5rem;
             color: #00b5e2;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
-            position: absolute;
-            top: 5%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-style: italic;
-            font-weight: bold;
-            display: none;
-            transition: transform 1s ease-in-out;
-        }
-
-        .main-message {
-            font-family: 'QuickSand', sans-serif;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
             text-align: center;
-            font-style: italic;
-            line-height: 1.5;
-            max-width: 80%;
-            opacity: 0;
-            transition: opacity 2s;
-            z-index: 2;
         }
 
-        /* Adjusted spacing between the messages */
-        #mainMessage1 {
-            top: 20%;
-        }
-
-        #mainMessage2 {
-            top: 40%;
-        }
-
-        #mainMessage3 {
-            top: 65%;
-        }
-
-        .quote {
-            font-family: 'Impact', sans-serif;
-            font-size: 1.0rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            font-style: italic;
-            opacity: 0;
-            transition: opacity 2s;
-            z-index: 2;
-        }
-
-        .quote-top-left {
-            top: 5%;
-            left: 5%;
-        }
-
-        .quote-top-right {
-            top: 5%;
-            right: 5%;
-        }
-
-        .quote-bottom-left {
-            bottom: 5%;
-            left: 5%;
-        }
-
-        .quote-bottom-right {
-            bottom: 5%;
-            right: 5%;
-        }
-
-        .slideshow-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            object-fit: contain;
-        }
-
-        .mySlides {
+        .main-message, .created-with-love {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
             display: none;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .slideshow-container img {
+            display: none;
+            max-width: 100%;
+            max-height: 70vh;
             object-fit: contain;
-            width: auto;
-            height: 100%;
         }
 
         button {
@@ -130,153 +48,79 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            position: absolute;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            display: none;
-        }
-
-        .created-with-love {
-            font-family: 'Pacifico', cursive;
-            font-size: 1.8rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            bottom: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            font-style: italic;
-            opacity: 0;
-            transition: opacity 2s;
-            z-index: 2;
-        }
-
-        @keyframes fadeInQuote {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Title -->
-    <h1 id="title">🎉 Happy 21st Birthday, Pookie! 🎉</h1>
+    <h1>🎉 Happy 21st Birthday, Pookie! 🎉</h1>
 
-    <!-- Main messages -->
-    <div class="message-container">
-        <div class="main-message" id="mainMessage1">
-            <p>Happy 21st Birthday, Pookie! 🎉 Bro, how is it that you still manage to have the most messed-up sleep schedule ever? 😂 Like, who needs sleep when you can stay up until 3 AM for no reason and then crash at 6 PM like it’s totally normal? 😴 You’ve turned “napping at random times” into an art form, and honestly, it’s impressive in the weirdest way. But hey, at least you’re living life on your own terms, even if your sleep pattern is an absolute mess. 🙌</p>
-        </div>
-        <div class="main-message" id="mainMessage2">
-            <p>Taking care of you, Pookie, has been a blessing (even though you sometimes make it feel like babysitting a 21-year-old toddler with a PhD in being cute 🍼). 🌟 But honestly, I wouldn’t trade it for anything. You’ve taught me what it means to show up for someone—whether it’s hyping me up, being my rock when I need it most, or just making me laugh until my stomach hurts. You’re not just cute—you’re pure magic wrapped in a ball of chaos, and my life’s been so much brighter since you showed up. 💫</p>
-        </div>
-        <div class="main-message" id="mainMessage3">
-            <p>Here’s to more laughs, more epic memories, and me always having your back (even if it means reminding you to eat, sit properly, or stop being too adorable for your own good). Love you, bro. ❤️‍🔥 Never forget how much you mean to me, Pookie. I might threaten to dump you for your cuteness overload, but you know I’m always gonna be there for you. Let’s make this year even crazier than the last! 🎂</p>
-        </div>
-    </div>
+    <div class="main-message" id="message1">You’re amazing! Enjoy your special day! ❤️</div>
+    <div class="main-message" id="message2">Here’s to creating more memories! 🎂</div>
+    <div class="main-message" id="message3">Love you, Pookie! 🎉</div>
 
-    <!-- Quotes at corners -->
-    <div class="quote quote-top-left">"Pookie, eat more<br> You’re not going to grow taller by staring at your food 😒"</div>
-    <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched 🍼"</div>
-    <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>The more I wonder what trouble you're planning."</div>
-    <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise 😘🎀"</div>
-
-    <!-- Slideshow container -->
     <div class="slideshow-container">
-        <img class="mySlides" src="static/image1.jpg" alt="Image 1">
-        <img class="mySlides" src="static/image2.jpeg" alt="Image 2">
-        <img class="mySlides" src="static/image3.png" alt="Image 3">
+        <img src="https://via.placeholder.com/600x400?text=Image+1" class="mySlides">
+        <img src="https://via.placeholder.com/600x400?text=Image+2" class="mySlides">
+        <img src="https://via.placeholder.com/600x400?text=Image+3" class="mySlides">
     </div>
 
-    <!-- Created with love message -->
-    <div class="created-with-love " id="createdWithLove">Created with Love ❤️</div>
+    <div class="created-with-love" id="createdWithLove">Created with Love ❤️</div>
 
-    <!-- Surprise Awaits Button -->
     <button id="startButton" onclick="startShow()">Surprise Awaits!</button>
-
-    <!-- Revisit Button -->
-    <button id="revisitButton" onclick="revisit()">Revisit</button>
 
     <script>
         let slideIndex = 0;
         let messageIndex = 0;
         let slideInterval;
-        let isRevisitClicked = false;
+        let messages = document.querySelectorAll(".main-message");
+        let slides = document.querySelectorAll(".mySlides");
 
-        // Function to start the slideshow and show messages
         function startShow() {
-            // Show the title in the center
-            document.getElementById("title").style.display = "block";
-
-            // Wait for 2 seconds before moving the title to the top
-            setTimeout(function () {
-                document.getElementById("title").style.transform = "translate(-50%, 0)";
-                document.getElementById("title").style.top = "5%";
-                document.getElementById("title").style.transition = "transform 1s ease-in-out";
-
-                // Start the slideshow
-                slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
-
-                // Show main messages one by one
-                showMainMessage();
-
-                // Fade in the quotes
-                const quotes = document.querySelectorAll(".quote");
-                quotes.forEach((quote, index) => {
-                    setTimeout(() => {
-                        quote.style.opacity = "1";
-                    }, 2000 * index); // Delay each quote appearing
-                });
-
-                // Hide the start button after starting the animation
-                document.getElementById("startButton").style.display = "none";
-            }, 2000); // Wait 2 seconds before moving the title to the top
+            document.getElementById("startButton").style.display = "none"; // Hide "Surprise Awaits" button
+            showSlides();
+            showMessages();
         }
 
-        // Function to show slides
         function showSlides() {
-            if (isRevisitClicked) {
-                clearInterval(slideInterval);
-                return;
-            }
-            let slides = document.getElementsByClassName("mySlides");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-            slides[slideIndex - 1].style.display = "block";
+            slideInterval = setInterval(() => {
+                // Hide all slides
+                slides.forEach(slide => slide.style.display = "none");
+
+                // Show current slide
+                slides[slideIndex].style.display = "block";
+
+                // Move to next slide or stop if it's the last one
+                slideIndex++;
+                if (slideIndex >= slides.length) {
+                    clearInterval(slideInterval);
+                    showFinalMessage();
+                }
+            }, 3000);
         }
 
-        // Function to show main messages one by one
-        function showMainMessage() {
-            const messages = document.querySelectorAll(".main-message");
-            messages.forEach((message) => (message.style.opacity = "0")); // Hide all messages
-
-            if (messageIndex < messages.length) {
-                messages[messageIndex].style.opacity = "1"; // Show the current message
+        function showMessages() {
+            const messageInterval = 3000;
+            messages.forEach((message, index) => {
                 setTimeout(() => {
-                    messages[messageIndex].style.opacity = "0"; // Hide the current message after 3 seconds
-                    messageIndex++;
-                    showMainMessage(); // Call the function recursively for the next message
-                }, 3000); // Display each message for 3 seconds
-            }
+                    message.style.opacity = "1";
+                    message.style.display = "block";
+                }, index * messageInterval);
+
+                setTimeout(() => {
+                    message.style.opacity = "0";
+                }, (index + 1) * messageInterval);
+            });
         }
 
-        // Function for Revisit Button
-        function revisit() {
-            isRevisitClicked = true;
-            clearInterval(slideInterval); // Stop the slideshow
-            document.getElementById("revisitButton").style.display = "none"; // Hide revisit button after click
+        function showFinalMessage() {
+            document.getElementById("createdWithLove").style.opacity = "1";
+            document.getElementById("createdWithLove").style.display = "block";
         }
-
-        // Call startShow when the page loads
-        document.getElementById("startButton").style.display = "block"; // Display the "Surprise Awaits!" button initially
     </script>
+</body>
+</html>
+
 </body>
 </html>
