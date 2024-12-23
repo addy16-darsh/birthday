@@ -35,7 +35,7 @@
             transform: translate(-50%, -50%);
             font-style: italic;
             font-weight: bold;
-            display: none;
+            display: block;
             transition: transform 1s ease-in-out;
         }
 
@@ -111,6 +111,7 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
+            display: none;
         }
 
         .created-with-love {
@@ -130,19 +131,19 @@
         }
     </style>
 </head>
-<body>
+<body onload="startShow()">
     <h1 id="title">🎉 Happy 21st Birthday, Pookie! 🎉</h1>
 
     <div class="message-container">
-        <div class="main-message" id="mainMessage1">Happy 21st Birthday, Pookie! 🎉 Bro, how is it that you still manage to have the most messed-up sleep schedule ever? 😂</div>
-        <div class="main-message" id="mainMessage2">Taking care of you has been a blessing, even though you make it feel like babysitting a 21-year-old toddler with a PhD in being cute 🍼.</div>
-        <div class="main-message" id="mainMessage3">Here’s to more laughs, more memories, and me always having your back, Pookie! 😘</div>
+        <div class="main-message" id="mainMessage1">Happy 21st Birthday, Pookie! 🎉 Bro, how is it that you still manage to have the most messed-up sleep schedule ever? 😂 Like, who needs sleep when you can stay up until 3 AM for no reason and then crash at 6 PM like it’s totally normal?</div>
+        <div class="main-message" id="mainMessage2">Taking care of you, Pookie, has been a blessing (even though you sometimes make it feel like babysitting a 21-year-old toddler with a PhD in being cute 🎿).</div>
+        <div class="main-message" id="mainMessage3">Here’s to more laughs, more epic memories, and me always having your back (even if it means reminding you to eat, sit properly, or stop being too adorable for your own good).</div>
     </div>
 
     <div class="quote quote-top-left">"Pookie, eat more<br> You’re not going to grow taller by staring at your food 😒"</div>
-    <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, 🍼"</div>
-    <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>The more I wonder what you're planning."</div>
-    <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest 😘🎀"</div>
+    <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched 🍼"</div>
+    <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>The more I wonder what trouble you're planning."</div>
+    <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise 😘🎀"</div>
 
     <div class="slideshow-container">
         <img class="mySlides" src="static/image1.jpg" alt="Image 1">
@@ -152,41 +153,47 @@
 
     <div class="created-with-love" id="createdWithLove">Created with Love ❤️</div>
 
-    <button onclick="startShow()">Surprise Awaits!</button>
-
     <script>
         let slideIndex = 0;
         let messageIndex = 0;
 
         function startShow() {
-            document.getElementById("title").style.display = "block";
-            setTimeout(() => {
-                document.getElementById("title").style.transform = "translate(-50%, 0)";
-                showSlides();
-                document.querySelector("button").style.display = "none";
-            }, 2000);
+            document.getElementById("title").style.transform = "translate(-50%, 0)";
+            document.getElementById("title").style.top = "5%";
+            document.getElementById("title").style.transition = "transform 1s ease-in-out";
+            showSlides();
+            showMainMessage();
         }
 
         function showSlides() {
-            const slides = document.getElementsByClassName("mySlides");
-            const messages = document.querySelectorAll(".main-message");
-            const quotes = document.querySelectorAll(".quote");
-
-            if (slideIndex >= slides.length) {
-                document.getElementById("createdWithLove").style.opacity = "1";
-                return;
+            let slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
             }
-
-            Array.from(slides).forEach((slide, i) => (slide.style.display = i === slideIndex ? "block" : "none"));
-            Array.from(messages).forEach((msg, i) => (msg.style.opacity = i === slideIndex ? "1" : "0"));
-            Array.from(quotes).forEach((quote, i) => (quote.style.opacity = i === slideIndex ? "1" : "0"));
-
             slideIndex++;
-            setTimeout(showSlides, 3900);
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3000);
+        }
+
+        function showMainMessage() {
+            const messages = document.querySelectorAll(".main-message");
+            messages.forEach((message) => (message.style.opacity = "0"));
+            if (messageIndex < messages.length) {
+                messages[messageIndex].style.opacity = "1";
+                setTimeout(() => {
+                    messages[messageIndex].style.opacity = "0";
+                    messageIndex++;
+                    showMainMessage();
+                }, 3900);
+            } else {
+                document.getElementById("createdWithLove").style.opacity = "1";
+            }
         }
     </script>
 </body>
-</html>
 
 
 
