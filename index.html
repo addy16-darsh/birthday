@@ -35,7 +35,7 @@
             transform: translate(-50%, -50%);
             font-style: italic;
             font-weight: bold;
-            display: block;
+            display: none;
             transition: transform 1s ease-in-out;
         }
 
@@ -57,9 +57,18 @@
             z-index: 2;
         }
 
-        #mainMessage1 { top: 20%; }
-        #mainMessage2 { top: 40%; }
-        #mainMessage3 { top: 65%; }
+        /* Adjusted spacing between the messages */
+        #mainMessage1 {
+            top: 20%;
+        }
+
+        #mainMessage2 {
+            top: 40%;
+        }
+
+        #mainMessage3 {
+            top: 65%;
+        }
 
         .quote {
             font-family: 'Impact', sans-serif;
@@ -73,10 +82,25 @@
             z-index: 2;
         }
 
-        .quote-top-left { top: 5%; left: 5%; }
-        .quote-top-right { top: 5%; right: 5%; }
-        .quote-bottom-left { bottom: 5%; left: 5%; }
-        .quote-bottom-right { bottom: 5%; right: 5%; }
+        .quote-top-left {
+            top: 5%;
+            left: 5%;
+        }
+
+        .quote-top-right {
+            top: 5%;
+            right: 5%;
+        }
+
+        .quote-bottom-left {
+            bottom: 5%;
+            left: 5%;
+        }
+
+        .quote-bottom-right {
+            bottom: 5%;
+            right: 5%;
+        }
 
         .slideshow-container {
             position: absolute;
@@ -130,18 +154,9 @@
             z-index: 2;
         }
 
-        .revisit-btn {
-            background-color: #e84a5f;
-            color: white;
-            padding: 12px 25px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            position: absolute;
-            bottom: 5%;
-            right: 20%;
-            display: none;
+        @keyframes fadeInQuote {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
@@ -179,42 +194,51 @@
     <!-- Created with love message -->
     <div class="created-with-love " id="createdWithLove">Created with Love ❤️</div>
 
-    <!-- Revisit button -->
-    <button class="revisit-btn" onclick="revisit()">Revisit</button>
+    <!-- Revisit Button -->
+    <button id="revisitButton" onclick="revisit()">Revisit</button>
 
     <script>
         let slideIndex = 0;
         let messageIndex = 0;
         let slideInterval;
+        let isRevisitClicked = false;
 
         // Function to start the slideshow and show messages
         function startShow() {
-            // Start the slideshow
-            slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
+            // Show the title in the center
+            document.getElementById("title").style.display = "block";
 
-            // Show main messages one by one
-            showMainMessage();
+            // Wait for 2 seconds before moving the title to the top
+            setTimeout(function () {
+                document.getElementById("title").style.transform = "translate(-50%, 0)";
+                document.getElementById("title").style.top = "5%";
+                document.getElementById("title").style.transition = "transform 1s ease-in-out";
 
-            // Fade in the quotes
-            const quotes = document.querySelectorAll(".quote");
-            quotes.forEach((quote, index) => {
-                setTimeout(() => {
-                    quote.style.opacity = "1";
-                }, 2000 * index); // Delay each quote appearing
-            });
+                // Start the slideshow
+                slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
 
-            // Show "Created with Love"
-            setTimeout(() => {
-                document.getElementById("createdWithLove").style.opacity = "1";
-                document.querySelector(".revisit-btn").style.display = "block"; // Show Revisit button
-            }, 12000); // Show after the slides and messages
+                // Show main messages one by one
+                showMainMessage();
 
-            // Hide the start button
-            document.querySelector("button").style.display = "none";
+                // Fade in the quotes
+                const quotes = document.querySelectorAll(".quote");
+                quotes.forEach((quote, index) => {
+                    setTimeout(() => {
+                        quote.style.opacity = "1";
+                    }, 2000 * index); // Delay each quote appearing
+                });
+
+                // Hide the start button after starting the animation
+                document.querySelector("button").style.display = "none";
+            }, 2000); // Wait 2 seconds before moving the title to the top
         }
 
         // Function to show slides
         function showSlides() {
+            if (isRevisitClicked) {
+                clearInterval(slideInterval);
+                return;
+            }
             let slides = document.getElementsByClassName("mySlides");
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
@@ -241,18 +265,44 @@
             }
         }
 
-        // Revisit function to reset everything
-        function revisit() {
-            slideIndex = 0;
-            messageIndex = 0;
-            document.getElementById("createdWithLove").style.opacity = "0";
-            document.querySelector(".revisit-btn").style.display = "none";
-            startShow(); // Restart the show
+        // Function to stop the slideshow and vanish everything after the last animation
+        function stopSlideshow() {
+            clearInterval(slideInterval); // Stop slideshow
+
+            // Vanish all the content
+            setTimeout(() => {
+                document.getElementById("title").style.display = "none";
+                const messages = document.querySelectorAll(".main-message");
+                messages.forEach((message) => {
+                    message.style.display = "none";
+                });
+                const quotes = document.querySelectorAll(".quote");
+                quotes.forEach((quote) => {
+                    quote.style.display = "none";
+                });
+
+                // Show "Created with Love"
+                document.getElementById("createdWithLove").style.opacity = "1";
+
+                // Show the button again after everything vanishes
+                setTimeout(() => {
+                    document.querySelector("button").style.display = "block";
+                }, 1000); // Delay showing button after "Created with Love"
+            }, 15000); // Vanish after 15 seconds (adjust timing as needed)
         }
 
-        // Start the show automatically on load
-        window.onload = startShow;
+        // Function for Revisit Button
+        function revisit() {
+            isRevisitClicked = true;
+            stopSlideshow();
+            document.getElementById("revisitButton").style.display = "none"; // Hide revisit button after click
+        }
+
+        // Call startShow when the page loads
+        startShow();
     </script>
 </body>
+</html>
+
 </html>
 
