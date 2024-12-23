@@ -41,8 +41,8 @@
 
         .main-message {
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.0rem;  /* Reduced size of main message */
-            font-weight: bold;  /* Make main message bold */
+            font-size: 1.0rem;
+            font-weight: bold;
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
             position: absolute;
@@ -53,9 +53,12 @@
             font-style: italic;
             line-height: 1.5;
             max-width: 80%;
+            z-index: 2;
+        }
+
+        .main-message p {
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            z-index: 2;
         }
 
         .quote {
@@ -155,16 +158,19 @@
 
     <!-- Main message -->
     <div class="main-message" id="mainMessage">
-        Happy 21st Birthday, Pookie! 🎉 Bro, I still can’t wrap my head around the fact that it’s only been six months since you walked into my life because it feels like you’ve been part of it forever. 🫶 You didn’t just become my friend—you became my brother, my partner-in-crime, and my biggest supporter. 🙌 You’ve brought so much light, laughter, and realness into my world that I honestly don’t know how I was doing life before you came along. You’re the kind of person who makes even the bad days feel a little brighter, and for that, I’ll always be thankful.
-
-You’ve changed my life in ways I didn’t even think were possible. 🌟 You’ve taught me what it means to truly show up for someone and how powerful it feels to have someone show up for you without hesitation. You’ve got this energy that makes everything better—whether it’s hyping me up when I need it or just being there when life gets tough. 💯 You’re not just a friend; you’re my day one, my ride-or-die, my family. Love you, bro. ❤️‍🔥 Here’s to more laughs, more chaos, and more memories that we’ll talk about forever. You mean the world to me, Pookie. Never forget that. 🎂
+        <p id="firstParagraph">
+            Happy 21st Birthday, Pookie! 🎉 Bro, I still can’t wrap my head around the fact that it’s only been six months since you walked into my life because it feels like you’ve been part of it forever. 🫶 You didn’t just become my friend—you became my brother, my partner-in-crime, and my biggest supporter. 🙌 You’ve brought so much light, laughter, and realness into my world that I honestly don’t know how I was doing life before you came along.
+        </p>
+        <p id="secondParagraph" style="display: none;">
+            You’ve changed my life in ways I didn’t even think were possible. 🌟 You’ve taught me what it means to truly show up for someone and how powerful it feels to have someone show up for you without hesitation. 💯 You’re not just a friend; you’re my day one, my ride-or-die, my family. Love you, bro. ❤️‍🔥
+        </p>
     </div>
 
     <!-- Quotes at corners -->
     <div class="quote quote-top-left">"Pookie, eat more!<br>You’re not going to grow taller by staring at your food 😒"</div>
-    <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched🍼"</div>
+    <div class="quote quote-top-right">"No hiding behind the milk bottle, Pookie.<br> I’m always around, and my detective skills are unmatched 🍼"</div>
     <div class="quote quote-bottom-left">"Pookie, talk more! The quieter you get, <br>the more I wonder what trouble you're planning."</div>
-    <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise😘🎀"</div>
+    <div class="quote quote-bottom-right">"Just so you know, Pookie: <br>You're the cutest—don’t let anyone tell you otherwise 😘🎀"</div>
 
     <!-- Slideshow container -->
     <div class="slideshow-container">
@@ -183,53 +189,45 @@ You’ve changed my life in ways I didn’t even think were possible. 🌟 You�
         let slideIndex = 0;
         let slideInterval;
 
-        // Function to start the slideshow and show messages
         function startShow() {
-            // Show the title in the center
             document.getElementById("title").style.display = "block";
-
-            // Wait for 2 seconds before moving the title to the top
-            setTimeout(function() {
+            setTimeout(function () {
                 document.getElementById("title").style.transform = "translate(-50%, 0)";
                 document.getElementById("title").style.top = "5%";
-                document.getElementById("title").style.transition = "transform 1s ease-in-out";
 
-                // Start the slideshow
-                slideInterval = setInterval(showSlides, 3000); // Change slide every 3 seconds
+                document.querySelector("#firstParagraph").style.opacity = 1;
 
-                // Start fading in the main message
-                let mainMessage = document.getElementById("mainMessage");
-                mainMessage.style.opacity = 1; // Ensure opacity is set to 1 to make it visible
+                setTimeout(() => {
+                    const secondParagraph = document.getElementById("secondParagraph");
+                    secondParagraph.style.display = "block";
+                    secondParagraph.style.opacity = 1;
+                }, 3000);
 
-                // Fade in the quotes
                 const quotes = document.querySelectorAll(".quote");
                 quotes.forEach((quote, index) => {
                     setTimeout(() => {
                         quote.style.opacity = "1";
-                    }, 2000 * index); // Delay each quote appearing
+                    }, 2000 * index);
                 });
 
-                // Hide the start button after starting the animation
+                slideInterval = setInterval(showSlides, 3000);
                 document.querySelector("button").style.display = "none";
-            }, 2000); // Wait 2 seconds before moving the title to top
+            }, 2000);
 
-            // Stop the slideshow after 2 minutes (120 seconds) and show the "Created with Love" message
-            setTimeout(function() {
-                clearInterval(slideInterval); // Stop the slideshow
-                document.getElementById("createdWithLove").style.opacity = 1; // Show "Created with Love"
-                document.querySelector("button").style.display = "block"; // Show the button again
-            }, 60000); // 2 minutes
+            setTimeout(function () {
+                clearInterval(slideInterval);
+                document.getElementById("createdWithLove").style.opacity = 1;
+            }, 60000);
         }
 
-        // Function to show slides
         function showSlides() {
             let slides = document.getElementsByClassName("mySlides");
             for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
+                slides[i].style.display = "none";
             }
             slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.display = "block";
         }
     </script>
 
